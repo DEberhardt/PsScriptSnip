@@ -9,6 +9,9 @@
 # Abbreviated LineUri (starting with tel:+)
 '^tel:\+\d'
 
+# Two numerical digits
+'\d{2}'
+
 # Universal Match for Phone Numbers, LineUri, etc.
 '^(tel:)?\+?(([0-9]( |-)?)?(\(?[0-9]{3}\)?)( |-)?([0-9]{3}( |-)?[0-9]{4})|([0-9]{4,15}))?((;( |-)?ext=[0-9]{3,8}))?$'
 
@@ -23,5 +26,3 @@ if ( $_.Exception.Message -match "'(?<content>.*)'" ) {
 
 # Address format (for Get-CsOnlineLisLocation -LocationId $LocationId)
 '^[0-9a-f]{8}-([0-9a-f]{4}\-){3}[0-9a-f]{12}$'
-
-
