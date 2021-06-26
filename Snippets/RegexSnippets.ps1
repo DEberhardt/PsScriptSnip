@@ -12,6 +12,9 @@
 # Two numerical digits
 '\d{2}'
 
+# Emergency Services Numbers (99% coverage)
+'^(000|1(\d{2})|9(\d{2})|\d{1}11)$'
+
 # Universal Match for Phone Numbers, LineUri, etc.
 '^(tel:)?\+?(([0-9]( |-)?)?(\(?[0-9]{3}\)?)( |-)?([0-9]{3}( |-)?[0-9]{4})|([0-9]{4,15}))?((;( |-)?ext=[0-9]{3,8}))?$'
 
