@@ -1,14 +1,14 @@
 ﻿# Number matching
 function MatchNumber {
   param (
-    $matchString,
-    $MatchingNumbers,
+    $StringToMatch,
+    $NumbersToTest,
     [bool]$NotMatch
   )
 
-  foreach ($Number in $MatchingNumbers) {
+  foreach ($Number in $NumbersToTest) {
     [int]$pad = $Number.length + 4
-    $Matching = $Number -match $matchString
+    $Matching = $Number -match $StringToMatch
     $OutputString = if ( $Matching ) { 'matches' } else { 'NO match' }
     $OutputColour = if ( $Matching ) { if ($NotMatch) { 'DarkYellow' } else { 'DarkGreen' } } else { if ($NotMatch) { 'Green' } else { 'Red' } }
 
@@ -30,11 +30,11 @@ $Test = "Testing Emergency Numbers"
 
 Write-Output "$Test - SHOULD MATCH String: '$Pattern'"
 [string[]]$NumberInput = @('000', '111', '112', '133', '711', '911', '999')
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $false
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $false
 
 Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 [string[]]$NumberInput = @('00', '11', '1121', '2000', '9911')
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $true
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $true
 #endregion
 
 #region Matching US Number formats incl. spaces and dashes
@@ -54,7 +54,7 @@ Write-Output "$Test - SHOULD MATCH String: '$Pattern'"
   '+15551234567', '+1 555 123 4567', '+1 (555) 123 4567', '+1 (555)-123-4567',
   'tel:+15551234567', 'tel:+1 555 123 4567', 'tel:+1 (555) 123 4567', 'tel:+1 (555)-123-4567'
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $false
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $false
 
 Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 [string[]]$NumberInput = @(
@@ -63,7 +63,7 @@ Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
   '11 555 123 4567', '11 5551234567', '11 (555)1234567', '11 (555) 1234567', '11 (555) 123 4567',
   '555123456', '55512345671', '155512345671', '155512345671' #out of bounds
   )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $true
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $true
 #endregion
 
 #region Matching LineURI Formats
@@ -78,7 +78,7 @@ Write-Output "$Test - SHOULD MATCH String: '$Pattern'"
   'tel:+12345678;ext=123', 'tel:+123456789012345;ext=123' # LineURI upper and lower bounds incl. Extension lower bounds
   'tel:+12345678;ext=12345678', 'tel:+123456789012345;ext=12345678' # LineURI upper and lower bounds incl. Extension upper bounds
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $false
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $false
 
 Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 [string[]]$NumberInput = @(
@@ -92,7 +92,7 @@ Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 
   'tel:1234567890', 'tel:+1 234567890', 'tel:+1-234567890;ext=12345' # malformed
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $true
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $true
 #endregion
 
 #region Matching Any Phone Number Formats
@@ -137,7 +137,7 @@ Write-Output "$Test - SHOULD MATCH String: '$Pattern'"
   '1 2 3 4 5 1 2 3 4 5 6 7 8 9 0', 'tel:+1 2 3 4 5 1 2 3 4 5 6 7 8 9 0', 'tel:+1 2 3 4 5 1 2 3 4 5 6 7 8 9 0;ext=1234567' # Longest String
   #endregion
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $false
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $false
 
 Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 [string[]]$NumberInput = @(
@@ -155,7 +155,7 @@ Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
   '1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1'
   #endregion
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $true
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $true
 #endregion
 
 
@@ -187,7 +187,7 @@ Write-Output "$Test - SHOULD MATCH String: '$Pattern'"
   'tel:+12345678;ext=12345678', 'tel:+123456789012345;ext=12345678' # LineURI upper and lower bounds incl. Extension upper bounds
   #endregion
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $false
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $false
 
 Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
 [string[]]$NumberInput = @(
@@ -219,5 +219,5 @@ Write-Output "$Test - SHOULDN'T MATCH String: '$Pattern'"
   '1 2 3 4 5 1 2 3 4 5 6 7 8 9 0', 'tel:+1 2 3 4 5 1 2 3 4 5 6 7 8 9 0', 'tel:+1 2 3 4 5 1 2 3 4 5 6 7 8 9 0;ext=1234567' # Longest String
   #endregion
 )
-MatchNumber -matchString $Pattern -MatchingNumbers $NumberInput -NotMatch $true
+MatchNumber -StringToMatch $Pattern -NumbersToTest $NumberInput -NotMatch $true
 #endregion
