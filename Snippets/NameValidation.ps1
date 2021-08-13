@@ -1,4 +1,9 @@
-﻿# Parameter validation for Licenses and Service Plans:
+﻿#TODO:
+# Constant variables cannot be altered. - Define as constants until overwritten?
+#Set-Variable -Name 'Constant' -Value 25 -Option Constant
+
+
+# Parameter validation for Licenses and Service Plans:
 
 param (
   #License
