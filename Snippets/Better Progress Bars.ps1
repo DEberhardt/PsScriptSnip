@@ -28,8 +28,6 @@ $script:ActivityID0 = $($MyInvocation.MyCommand.Name)
 $StatusID0 = 'Processing'
 $CurrentOperationID0 = "'$UPN'"
 Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($CountID0++) -Of $script:StepsID0
-#Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($UserCounter++) -Of $UserPrincipalName.Count
-
 
 ## MaxID is 1
 $StatusID0 = 'Processing'
@@ -54,10 +52,9 @@ Write-Debug -Message "$ActivityID1 $StatusID1 $CurrentOperationID1`: Not enumera
 
 
 <# MaxId is 2
-$StatusID0 = 'Processing'
+$StatusID1 = 'Processing'
 $CurrentOperationID1 = $ActivityID2 = "Querying User Account"
-#Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($CountID0++) -Of $script:StepsID0
-Write-BetterProgress -Id 1 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($UserCounter++) -Of $UserPrincipalName.Count
+Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($CountID1++) -Of $script:StepsID1
 
 $StatusID2 = "User '$UPN'"
 $CurrentOperationID2 = 'Querying User Account'
