@@ -15,32 +15,32 @@ foreach ( $i in 1..10 ) {
 #Initialising Counters
 $script:StepsID0, $script:StepsID1 = Get-WriteBetterProgressSteps -Code $($MyInvocation.MyCommand.Definition) -MaxId 1
 $script:ActivityID0 = $($MyInvocation.MyCommand.Name)
-[int]$script:CountID0 = [int]$script:CountID1 = 0
+[int]$script:CountID0 = [int]$script:CountID1 = 1
 
 
 #PROCESS
 
 # MaxId is 0
 #before foreach ($s in $X)
-[int] $StepsID0 = $X.Count
+[int] $script:StepsID0 = $X.Count
 
 #inside foreach
 $StatusID0 = 'Processing'
 $CurrentOperationID0 = "'$UPN'"
-Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($CountID0++) -Of $script:StepsID0
+Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($script:CountID0++) -Of $script:StepsID0
 
 ## MaxID is 1
 $StatusID0 = 'Processing'
 $CurrentOperationID0 = $ActivityID1 = "'$UPN'"
-Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($CountID0++) -Of $script:StepsID0
+Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($script:CountID0++) -Of $script:StepsID0
 
 #before foreach ($s in $X)
-[int] $StepsID1 = $X.Count
+[int] $script:StepsID1 = $X.Count
 
 #inside foreach
 $StatusID1 = "User '$UPN'"
 $CurrentOperationID1 = 'Querying User Account'
-Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($CountID1++) -Of $script:StepsID1
+Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($script:CountID1++) -Of $script:StepsID1
 
 #Situational
 Write-Information "INFO:    $ActivityID1 $StatusID1 $CurrentOperationID1`: <Information>"
@@ -54,11 +54,11 @@ Write-Debug -Message "$ActivityID1 $StatusID1 $CurrentOperationID1`: Not enumera
 <# MaxId is 2
 $StatusID1 = 'Processing'
 $CurrentOperationID1 = $ActivityID2 = "Querying User Account"
-Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($CountID1++) -Of $script:StepsID1
+Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($script:CountID1++) -Of $script:StepsID1
 
 $StatusID2 = "User '$UPN'"
 $CurrentOperationID2 = 'Querying User Account'
-Write-BetterProgress -Id 2 -Activity $ActivityID2 -Status $StatusID2 -CurrentOperation $CurrentOperationID2 -Step ($CountID2++) -Of $script:StepsID2
+Write-BetterProgress -Id 2 -Activity $ActivityID2 -Status $StatusID2 -CurrentOperation $CurrentOperationID2 -Step ($script:CountID2++) -Of $script:StepsID2
 
 
 #Situational
