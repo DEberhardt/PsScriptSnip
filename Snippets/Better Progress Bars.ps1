@@ -31,7 +31,8 @@ Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOpe
 
 ## MaxID is 1
 $StatusID0 = 'Processing'
-$CurrentOperationID0 = $ActivityID1 = "'$UPN'"
+$CurrentOperationID0 = ''
+$ActivityID1 = "'$UPN'"
 Write-BetterProgress -Id 0 -Activity $ActivityID0 -Status $StatusID0 -CurrentOperation $CurrentOperationID0 -Step ($script:CountID0++) -Of $script:StepsID0
 
 #before foreach ($s in $X)
@@ -42,33 +43,19 @@ $StatusID1 = "User '$UPN'"
 $CurrentOperationID1 = 'Querying User Account'
 Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($script:CountID1++) -Of $script:StepsID1
 
-#Situational
-Write-Information "INFO:    $ActivityID1 $StatusID1 $CurrentOperationID1`: <Information>"
-Write-Warning -Message "$ActivityID1 $StatusID1 $CurrentOperationID1`: <Warning>: $($_.Exception.Message)"
-Write-Error -Message "$ActivityID1 $StatusID1 $CurrentOperationID1`: <Error Description> $($_.Exception.Message)"
-
-Write-Debug -Message "$ActivityID1 $StatusID1 $CurrentOperationID1`: Not enumerated: $($_.Exception.Message)"
-
-
-
-<# MaxId is 2
-$StatusID1 = 'Processing'
-$CurrentOperationID1 = $ActivityID2 = "Querying User Account"
+#or
+$ActivityID1 = "'$UPN'"
+$StatusID1 = $CurrentOperationID1 = ''
 Write-BetterProgress -Id 1 -Activity $ActivityID1 -Status $StatusID1 -CurrentOperation $CurrentOperationID1 -Step ($script:CountID1++) -Of $script:StepsID1
 
-$StatusID2 = "User '$UPN'"
-$CurrentOperationID2 = 'Querying User Account'
-Write-BetterProgress -Id 2 -Activity $ActivityID2 -Status $StatusID2 -CurrentOperation $CurrentOperationID2 -Step ($script:CountID2++) -Of $script:StepsID2
-
 
 #Situational
-Write-Information "INFO:    $ActivityID2 $StatusID2 $CurrentOperationID2`: <Information>"
-Write-Warning -Message "$ActivityID2 $StatusID2 $CurrentOperationID2`: <Warning>: $($_.Exception.Message)"
-Write-Error -Message "$ActivityID2 $StatusID2 $CurrentOperationID2`: <Error Description> $($_.Exception.Message)"
+Write-Information "INFO:    $ActivityID1 - $StatusID1 - $CurrentOperationID1`: <Information>"
+Write-Warning -Message "$ActivityID1 - $StatusID1 - $CurrentOperationID1`: <Warning>: $($_.Exception.Message)"
+Write-Error -Message "$ActivityID1 - $StatusID1 - $CurrentOperationID1`: <Error Description> $($_.Exception.Message)"
 
-Write-Debug -Message "$ActivityID2 $StatusID2 $CurrentOperationID2`: Not enumerated: $($_.Exception.Message)"
+Write-Debug -Message "$ActivityID1 - $StatusID1 - $CurrentOperationID1`: Not enumerated: $($_.Exception.Message)"
 
-#>
 
 
 # Output
