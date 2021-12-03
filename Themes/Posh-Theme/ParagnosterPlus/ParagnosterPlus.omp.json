@@ -4,6 +4,16 @@
             "type": "prompt",
             "alignment": "left",
             "segments": [{
+                    "type": "root",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0C0",
+                    "foreground": "#100e23",
+                    "background": "#ff8800",
+                    "properties": {
+                        "root_icon": ""
+                    }
+                },
+                {
                     "type": "executiontime",
                     "style": "powerline",
                     "powerline_symbol": "\uE0B0",
@@ -12,7 +22,7 @@
                     "properties": {
                         "threshold": 500,
                         "style": "amarillo",
-                        "prefix": " <#fefefe>\ufbab</> "
+                        "prefix": " "
                     }
                 },
                 {
@@ -28,13 +38,6 @@
                         "stopped_icon": "\uF04D ",
                         "track_separator": " - "
                     }
-                },
-                {
-                    "type": "root",
-                    "style": "powerline",
-                    "powerline_symbol": "\uE0B0",
-                    "foreground": "#100e23",
-                    "background": "#ffe9aa"
                 },
                 {
                     "type": "session",
