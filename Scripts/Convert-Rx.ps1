@@ -61,7 +61,7 @@ function Convert-Rx {
       #Year      = $Year
     }
 
-    return $newNotation
+    Write-Output $newNotation
   } #process
 
   end {
