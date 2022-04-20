@@ -1,0 +1,125 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "blocks": [{
+            "type": "prompt",
+            "alignment": "left",
+            "segments": [{
+                    "type": "root",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0C0",
+                    "foreground": "#100e23",
+                    "background": "#ff8800",
+                    "properties": {
+                        "root_icon": ""
+                    }
+                },
+                {
+                    "type": "executiontime",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#8800dd",
+                    "properties": {
+                        "threshold": 500,
+                        "style": "amarillo",
+                        "prefix": " "
+                    }
+                },
+                {
+                    "type": "spotify",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#1BD760",
+                    "properties": {
+                        "prefix": "\uF9C6 ",
+                        "playing_icon": "\uE602 ",
+                        "paused_icon": "\uF8E3 ",
+                        "stopped_icon": "\uF04D ",
+                        "track_separator": " - "
+                    }
+                },
+                {
+                    "type": "session",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#100e23",
+                    "background": "#ffffff",
+                    "properties": {
+                        "user_info_separator": "",
+                        "display_host": false
+                    }
+                },
+                {
+                    "type": "path",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#100e23",
+                    "background": "#91ddff",
+                    "properties": {
+                        "folder_icon": "\uF115",
+                        //"folder_separator_icon": "\uE0B1",
+                        "style": "full"
+                    }
+                },
+                {
+                    "type": "git",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#193549",
+                    "background": "#95ffa4"
+                },
+                {
+                    "type": "python",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#100e23",
+                    "background": "#906cff",
+                    "properties": {
+                        "prefix": " \uE235 "
+                    }
+                },
+                {
+                    "type": "exit",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#ff8080",
+                    "properties": {
+                        //"prefix": " \uE20F"
+                        "prefix": " "
+                    }
+                }
+            ]
+        },
+        {
+            "type": "prompt",
+            "alignment": "right",
+            "segments": [{
+                "type": "time",
+                "style": "plain",
+                "foreground": "#91ddff",
+                "properties": {
+                    "time_format": "15:04:05"
+                }
+            }]
+        },
+        {
+            "type": "newline"
+        },
+        {
+            "type": "prompt",
+            "alignment": "left",
+            "segments": [{
+                "type": "text",
+                "style": "plain",
+                "foreground": "#007ACC",
+                "properties": {
+                    "prefix": "",
+                    "text": "\u276F"
+                }
+            }]
+        }
+    ],
+    "final_space": false
+}
