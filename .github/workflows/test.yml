@@ -1,0 +1,51 @@
+﻿name: test
+on: push
+
+jobs:
+  test-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Show Date
+      run: |
+        "$date = Get-Date"
+        $date
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Show Date
+      run: |
+        "$date = Get-Date"
+        $date
+  test-macos:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Show Date
+      run: |
+        "$date = Get-Date"
+        $date
+  test-final:
+    runs-on: ubuntu-latest
+    needs: [test-ubuntu, test-windows, test-macos]
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Finish
+      run: echo "Done"
