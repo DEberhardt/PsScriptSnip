@@ -12,7 +12,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Show Date
       run: |
-        "$date = Get-Date"
+        $date = Get-Date
         $date
   test-ubuntu:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Show Date
       run: |
-        "$date = Get-Date"
+        $date = Get-Date
         $date
   test-macos:
     runs-on: macos-latest
@@ -36,7 +36,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Show Date
       run: |
-        "$date = Get-Date"
+        $date = Get-Date
         $date
   test-final:
     runs-on: ubuntu-latest
