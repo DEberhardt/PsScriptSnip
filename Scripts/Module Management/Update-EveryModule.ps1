@@ -31,7 +31,7 @@
     [parameter()]
     [switch]$KeepOldModuleVersions,
     [parameter()]
-    [array]$ExcludedModulesforRemoval = @('Az')
+    [array]$ExcludedModulesforRemoval = @('Az','MsGraph')
   )
   # Get all installed modules that have a newer version available
   Write-Verbose 'Checking all installed modules for available updates.'
@@ -73,7 +73,7 @@
           Write-Verbose "Removing old module $($_.Name)"
           if ($ExcludedModulesforRemoval -contains $_.Name) {
             Write-Verbose "$($allversions.count) versions of this module found [ $($module.name) ]"
-            Write-Verbose 'Please check this manually as removing the module can cause instabillity.'
+            Write-Verbose 'Please check this manually as removing the module can cause instability.'
           }
           else {
             try {
