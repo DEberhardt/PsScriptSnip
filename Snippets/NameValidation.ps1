@@ -65,16 +65,16 @@ param (
   #Time Zone
   [Parameter(HelpMessage = 'TimeZone Identifier from Get-CsAutoAttendantSupportedTimeZone')]
   [ValidateScript( {
-      if (-not $global:TeamsFunctionsCsAutoAttendantSupportedZimeZone) { $global:TeamsFunctionsCsAutoAttendantSupportedZimeZone = Get-CsAutoAttendantSupportedTimeZone }
-      [System.Collections.Arraylist]$TimeZoneUTCStrings = ($TeamsFunctionsCsAutoAttendantSupportedZimeZone | Where-Object DisplayName -NotLike '(UTC)*').DisplayName.Substring(1, 9) | Get-Unique
+      if (-not $global:TeamsFunctionsCsAutoAttendantSupportedTimeZone) { $global:TeamsFunctionsCsAutoAttendantSupportedTimeZone = Get-CsAutoAttendantSupportedTimeZone }
+      [System.Collections.Arraylist]$TimeZoneUTCStrings = ($TeamsFunctionsCsAutoAttendantSupportedTimeZone | Where-Object DisplayName -NotLike '(UTC)*').DisplayName.Substring(1, 9) | Get-Unique
       [void]$TimeZoneUTCStrings.Add('UTC')
       if ($_ -in $TimeZoneUTCStrings) { $True } else {
         throw [System.Management.Automation.ValidationMetadataException] "Parameter 'TimeZone' must be of the set: $($TimeZoneUTCStrings -join ',')"
       }
     })]
   [ArgumentCompleter( {
-      if (-not $global:TeamsFunctionsCsAutoAttendantSupportedZimeZone) { $global:TeamsFunctionsCsAutoAttendantSupportedZimeZone = Get-CsAutoAttendantSupportedTimeZone }
-      [System.Collections.Arraylist]$TimeZoneUTCStrings = ($TeamsFunctionsCsAutoAttendantSupportedZimeZone | Where-Object DisplayName -NotLike '(UTC)*').DisplayName.Substring(1, 9) | Get-Unique
+      if (-not $global:TeamsFunctionsCsAutoAttendantSupportedTimeZone) { $global:TeamsFunctionsCsAutoAttendantSupportedTimeZone = Get-CsAutoAttendantSupportedTimeZone }
+      [System.Collections.Arraylist]$TimeZoneUTCStrings = ($TeamsFunctionsCsAutoAttendantSupportedTimeZone | Where-Object DisplayName -NotLike '(UTC)*').DisplayName.Substring(1, 9) | Get-Unique
       [void]$TimeZoneUTCStrings.Add('UTC')
       $TimeZoneUTCStrings | Sort-Object | ForEach-Object {
         [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', "$($TimeZoneUTCStrings.Count) records available")
