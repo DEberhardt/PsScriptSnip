@@ -4,7 +4,7 @@
 
 
 # Parameter validation for Licenses and Service Plans:
-
+#region ValidateScript and ArgumentCompleter in PARAM Block
 param (
   #License
   [Parameter(HelpMessage = 'License(s)')]
@@ -112,8 +112,68 @@ param (
       }
     })]
   [string]$CountryCode
-
 )
+#endregion
+
+#region ValidateScript in PARAM Block, ArgumentCompleter in PSM1
+param(
+  #region License & ServicePlan
+  [Parameter(Mandatory, HelpMessage = 'License to be tested')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbAzureAdLicense)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'License' - Invalid license string. Supported Parameternames can be found with Intellisense or Get-AzureAdLicense"
+      }
+    })]
+  [string]$License,
+
+  [Parameter(Mandatory, HelpMessage = 'AzureAd Service Plan')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbAzureAdLicenseServicePlan)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'ServicePlan' - Invalid ServicePlan string. Supported Parameternames can be found with Intellisense or Get-AzureAdLicenseServicePlan (ServicePlanName)"
+      }
+    })]
+  [string]$ServicePlan,
+  #endregion
+
+  #region Usage Location & CountryCode
+  [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'UsageLocation' must be of the set: $global:TeamsFunctionsCountryTable"
+      }
+    })]
+  [string]$UsageLocation = 'US',
+
+  [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'CountryCode' must be of the set: $global:TeamsFunctionsCountryTable"
+      }
+    })]
+  [string]$CountryCode,
+  #endregion
+
+  #region Language & TimeZone
+  [Parameter(HelpMessage = 'Language Identifier from Get-CsAutoAttendantSupportedLanguage.')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbSupportedLanguageIds)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'LanguageId' must be of the set: $global:TeamsFunctionsCsAutoAttendantSupportedLanguageIds"
+      }
+    })]
+  [string]$LanguageId,
+
+  [Parameter(HelpMessage = 'TimeZone Identifier from Get-CsAutoAttendantSupportedTimeZone')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbSupportedTimeZone)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'TimeZone' must be of the set: $($global:TeamsFunctionsSupportedTimeZone -join ',')"
+      }
+    })]
+  [string]$TimeZone = 'UTC',
+  #endregion
+
+  $script:otherParams
+)
+#endregion
 
 
 $License # ParameterName
