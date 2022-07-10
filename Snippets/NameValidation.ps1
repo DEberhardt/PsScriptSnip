@@ -121,7 +121,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'License to be tested')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbAzureAdLicense)) { return $true } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'License' - Invalid license string. Supported Parameternames can be found with Intellisense or Get-AzureAdLicense"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid License. Use Intellisense for options or Get-AzureAdLicense (ParameterName)'
       }
     })]
   [string]$License,
@@ -129,7 +129,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'AzureAd Service Plan')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbAzureAdLicenseServicePlan)) { return $true } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'ServicePlan' - Invalid ServicePlan string. Supported Parameternames can be found with Intellisense or Get-AzureAdLicenseServicePlan (ServicePlanName)"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ServicePlan. Use Intellisense for options or Get-AzureAdLicenseServicePlan (ServicePlanName)'
       }
     })]
   [string]$ServicePlan,
@@ -139,7 +139,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'UsageLocation' must be of the set: $global:TeamsFunctionsCountryTable"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options'
       }
     })]
   [string]$UsageLocation = 'US',
@@ -147,7 +147,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'CountryCode' must be of the set: $global:TeamsFunctionsCountryTable"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options'
       }
     })]
   [string]$CountryCode,
@@ -157,7 +157,7 @@ param(
   [Parameter(HelpMessage = 'Language Identifier from Get-CsAutoAttendantSupportedLanguage.')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbSupportedLanguageIds)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'LanguageId' must be of the set: $global:TeamsFunctionsCsAutoAttendantSupportedLanguageIds"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a supported Langauge Id. Use Intellisense for options'
       }
     })]
   [string]$LanguageId,
@@ -165,16 +165,229 @@ param(
   [Parameter(HelpMessage = 'TimeZone Identifier from Get-CsAutoAttendantSupportedTimeZone')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbSupportedTimeZone)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] "Parameter 'TimeZone' must be of the set: $($global:TeamsFunctionsSupportedTimeZone -join ',')"
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a supported TimeZone. Use Intellisense for options'
       }
     })]
   [string]$TimeZone = 'UTC',
   #endregion
 
+  #region Policies
+
+  [Parameter(Mandatory, ParameterSetName = 'DirectRouting', ValueFromPipelineByPropertyName, HelpMessage = 'Name of the Online Voice Routing Policy')]
+  [Alias('OVP')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbVoiceRoutingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$OnlineVoiceRoutingPolicy,
+
+  [Parameter(ValueFromPipelineByPropertyName, HelpMessage = 'Name of the Tenant Dial Plan')]
+  [Alias('TDP')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTenantDialPlan)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Dial Plan in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$TenantDialPlan,
+
+  [Parameter(HelpMessage = 'IP Phone Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsIPPhonePolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$IPPhonePolicy,
+
+  [Parameter(HelpMessage = 'Teams Calling Line Identity')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallingLineIdentity)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$TeamsCallingLineIdentity,
+
+  [Parameter(HelpMessage = 'Teams Calling Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$TeamsCallingPolicy,
+
+  [Parameter(HelpMessage = 'Teams Call Park Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallParkPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTeamsCallParkPolicy })]
+  [string]$TeamsCallParkPolicy,
+
+  [Parameter(HelpMessage = 'Teams Emergency Calling Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbEmergencyCallingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$TeamsEmergencyCallingPolicy,
+
+  [Parameter(HelpMessage = 'Teams Emergency CallRouting Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbEmergencyCallRoutingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [string]$TeamsEmergencyCallRoutingPolicy,
+
+
+  #endregion
   $script:otherParams
 )
 #endregion
 
+#region ValidateScript and ArgumentCompletions (PS7 and PS5 only with tweak!) in PARAM Block, ArgumentCompleter in PSM1
+param(
+  #region License & ServicePlan
+  [Parameter(Mandatory, HelpMessage = 'License to be tested')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbAzureAdLicense)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid License. Use Intellisense for options or Get-AzureAdLicense (ParameterName)'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbAzureAdLicense })]
+  [string]$License,
+
+  [Parameter(Mandatory, HelpMessage = 'AzureAd Service Plan')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbAzureAdLicenseServicePlan)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ServicePlan. Use Intellisense for options or Get-AzureAdLicenseServicePlan (ServicePlanName)'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbAzureAdLicenseServicePlan })]
+  [string]$ServicePlan,
+  #endregion
+
+  #region Usage Location & CountryCode
+  [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options '
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTwoLetterCountryCode })]
+  [string]$UsageLocation = 'US',
+
+  [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options '
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTwoLetterCountryCode })]
+  [string]$CountryCode,
+  #endregion
+
+  #region Language & TimeZone
+  [Parameter(HelpMessage = 'Language Identifier from Get-CsAutoAttendantSupportedLanguage.')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbSupportedLanguageIds)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a supported Langauge Id. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbSupportedLanguageIds })]
+  [string]$LanguageId,
+
+  [Parameter(HelpMessage = 'TimeZone Identifier from Get-CsAutoAttendantSupportedTimeZone')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbSupportedTimeZone)) { $True } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a supported TimeZone. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbSupportedTimeZone })]
+  [string]$TimeZone = 'UTC',
+  #endregion
+
+  #region Policies
+  [Parameter(Mandatory, ParameterSetName = 'DirectRouting', ValueFromPipelineByPropertyName, HelpMessage = 'Name of the Online Voice Routing Policy')]
+  [Alias('OVP')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbVoiceRoutingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbVoiceRoutingPolicy })]
+  [string]$OnlineVoiceRoutingPolicy,
+
+  [Parameter(ValueFromPipelineByPropertyName, HelpMessage = 'Name of the Tenant Dial Plan')]
+  [Alias('TDP')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTenantDialPlan)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Dial Plan in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbVoiceRoutingPolicy })]
+  [string]$TenantDialPlan,
+
+  [Parameter(HelpMessage = 'IP Phone Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsIPPhonePolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTeamsIPPhonePolicy })]
+  [string]$IPPhonePolicy,
+
+  [Parameter(HelpMessage = 'Teams Calling Line Identity')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallingLineIdentity)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTeamsCallingLineIdentity })]
+  [string]$TeamsCallingLineIdentity,
+
+  [Parameter(HelpMessage = 'Teams Calling Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTeamsCallingPolicy })]
+  [string]$TeamsCallingPolicy,
+
+  [Parameter(HelpMessage = 'Teams Call Park Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbTeamsCallParkPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbTeamsCallParkPolicy })]
+  [string]$TeamsCallParkPolicy,
+
+  [Parameter(HelpMessage = 'Teams Emergency Calling Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbEmergencyCallingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbEmergencyCallingPolicy })]
+  [string]$TeamsEmergencyCallingPolicy,
+
+  [Parameter(HelpMessage = 'Teams Emergency CallRouting Policy')]
+  [ValidateScript( {
+      if ($_ -in $(&$global:TfAcSbEmergencyCallRoutingPolicy)) { return $true } else {
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid Policy in the Tenant. Use Intellisense for options'
+      }
+    })]
+  [ArgumentCompletions({ &$global:TfAcSbEmergencyCallRoutingPolicy })]
+  [string]$TeamsEmergencyCallRoutingPolicy,
+
+
+  #endregion
+  $script:otherParams
+)
+#endregion
 
 $License # ParameterName
 $CallingPlan # ParameterName
