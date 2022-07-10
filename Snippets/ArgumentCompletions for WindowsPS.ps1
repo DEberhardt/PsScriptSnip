@@ -39,3 +39,5 @@ function Get-Country {
   # return parameter
   $PSBoundParameters
 }
+
+#NOTE: This does not work if ScriptBlocks are used to determine the values
