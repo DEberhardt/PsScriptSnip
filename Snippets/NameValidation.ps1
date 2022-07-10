@@ -61,7 +61,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options '
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options'
       } })]
   [ArgumentCompleter({ &$global:TfAcSbTwoLetterCountryCode })]
   [string]$UsageLocation,
@@ -69,7 +69,7 @@ param(
   [Parameter(Mandatory, HelpMessage = 'Country as TwoLetterCountryCode')]
   [ValidateScript( {
       if ($_ -in $(&$global:TfAcSbTwoLetterCountryCode)) { $True } else {
-        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options '
+        throw [System.Management.Automation.ValidationMetadataException] 'Value must be a valid ISO3166-alpha2 Two-Letter CountryCode. Use Intellisense for options'
       } })]
   [ArgumentCompleter({ &$global:TfAcSbTwoLetterCountryCode })]
   [string]$CountryCode,
