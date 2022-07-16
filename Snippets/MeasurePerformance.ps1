@@ -2,9 +2,9 @@
 
 # Long version (for multiple consecute Tests
 $target = 1000 # Target duration in MS (used for colour)
-
 $max = 10 # Number of tests
 $Test = 'Description'
+
 $Result = $([math]::Round((
       1..$max | Measure-Command -Expression {
         #Test
@@ -18,7 +18,6 @@ Write-Host "$Result ms - $Test" -ForegroundColor $Color
 
 # Short version (ideal for quick tests)
 $max = 1000 # Number of tests
-
 $Test = 'Description'
 Write-Host "$([math]::Round((
   1..$max | Measure-Command -Expression {
