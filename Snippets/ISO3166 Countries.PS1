@@ -18,7 +18,7 @@
 
 }
 
-[System.Collections.ArrayList]$global:TFCountries = @()
+[System.Collections.Generic.List[object]]$global:TFCountries = @()
 [void]$TFCountries.Add([TFCountry]::new('Afghanistan', 'AF', 'AFG', '004'))
 [void]$TFCountries.Add([TFCountry]::new('Albania', 'AL', 'ALB', '008'))
 [void]$TFCountries.Add([TFCountry]::new('Algeria', 'DZ', 'DZA', '012'))
