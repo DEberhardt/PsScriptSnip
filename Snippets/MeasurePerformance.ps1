@@ -1,10 +1,10 @@
 ﻿# Measure-Object to return an average per iteration
 
 # Long version (for multiple consecute Tests
+$target = 1000 # Target duration in MS (used for colour)
 
 $max = 10 # Number of tests
 $Test = 'Description'
-$target = 4000 # Target duration in MS (used for colour)
 $Result = $([math]::Round((
       1..$max | Measure-Command -Expression {
         #Test
@@ -23,6 +23,6 @@ $Test = 'Description'
 Write-Host "$([math]::Round((
   1..$max | Measure-Command -Expression {
     #Test
-    
+
   }
 ).TotalMilliSeconds/$max)) ms - $Test" -ForegroundColor Green
