@@ -54,6 +54,7 @@ function Convert-Rx {
     Write-Information [string]::Format('{0} CYL provided. Calculating to {1} Cylinders', $source, $target)
 
     $newNotation = [PSCustomObject][ordered] @{
+      PSTypeName = 'PowerShell.Eyesight.PrescriptionNotation'
       Eye       = $(try { $Eye.Substring(0, 1) } catch { 'X' })
       Spheres   = $('{0:N2}' -f $targetSPH) #[math]::Round( $targetSPH, 2 )
       Cylinders = $('{0:N2}' -f $targetCYL) #[math]::Round( $targetCYL, 2 )
